@@ -63,3 +63,10 @@ print(sorted_results.dtype)
 print(sorted_results)
 print("------------------------")
 
+#PART C
+x,m = power_iteration(M,x0,15)
+print(f"Q6. C)")
+print(f"----------------------")
+print(f"m = {m}")
+print(f"x = \n{x}")
+print(f"----------------------")
