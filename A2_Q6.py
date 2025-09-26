@@ -1,15 +1,13 @@
 import numpy as np
 import math
 
-# PART A.
-
-def power_iteration(A, x0):
+def power_iteration(A, x0,max_iterations):
     last_m=0
     m=max(x0, key=abs)[0]
     x = x0
     iteration = 0
 
-    while not math.isclose(m, last_m, rel_tol=1e-14): # matching to 14 digits
+    while iteration<max_iterations: 
         last_m = m
         iteration += 1
         x = A@x
@@ -24,13 +22,35 @@ adjacency_matrix = np.array([[0,0,1,0,0,0],
                                [1,1,0,0,0,1],
                                [1,1,1,1,0,0]]).T 
 
-col_sum = 1/np.sum(adjacency_matrix, axis=0)
+inv_col_sum = 1/np.sum(adjacency_matrix, axis=0)
 
-print(adjacency_matrix*col_sum)
+P = adjacency_matrix*inv_col_sum
+
+x0 = np.ones((P.shape[0],1), dtype=float)/P.shape[0]
+x = x0
+
+# PART A
+for i in range(50):
+    x = np.round(P@x, 5)
+
+print(f"Q6. A)")
+print(f"P = \n{P}\n")
+print(f"x(50) = \n{x}")
+print("------------------------")
 
 
-#x0 = np.ones((5,1), dtype=float)
+#PART B
+alpha = 0.85
 
-#x,m = power_iteration(A,x0)
+M = np.ones(P.shape, dtype=float)*(1-alpha)/P.shape[0] + P*alpha
+x = x0
 
+for i in range(50):
+    x = np.round(M@x, 5)
+
+print(f"Q6. B)")
+print(f"M = \n{M}")
+print(f"x(50) = \n{x}")
+print()
+print("------------------------")
 
