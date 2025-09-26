@@ -40,6 +40,7 @@ print("------------------------")
 
 
 #PART B
+dtype = [('importance', float), ('index', int)]
 alpha = 0.85
 
 M = np.ones(P.shape, dtype=float)*(1-alpha)/P.shape[0] + P*alpha
@@ -49,8 +50,16 @@ for i in range(50):
     x = np.round(M@x, 5)
 
 print(f"Q6. B)")
-print(f"M = \n{M}")
-print(f"x(50) = \n{x}")
-print()
+print(f"M = \n{M}\n")
+print(f"x(50) = \n{x}\n")
+
+#adding index and sorting matrix
+indexed_results = np.empty(M.shape[0], dtype=dtype)
+indexed_results['importance'] = x.flatten()
+indexed_results['index'] = np.arange(M.shape[0])
+
+sorted_results = np.sort(indexed_results, order='importance')[::-1].reshape(M.shape[0],1)
+print(sorted_results.dtype)
+print(sorted_results)
 print("------------------------")
 
