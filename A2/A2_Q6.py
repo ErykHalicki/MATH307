@@ -1,19 +1,7 @@
 import numpy as np
 import math
 
-def power_iteration(A, x0,max_iterations):
-    last_m=0
-    m=max(x0, key=abs)[0]
-    x = x0
-    iteration = 0
 
-    while iteration<max_iterations: 
-        last_m = m
-        iteration += 1
-        x = A@x
-        m=max(x, key=abs)[0]
-        x=x/m
-    return x,m
 
 adjacency_matrix = np.array([[0,0,1,0,0,0],
                                [1,0,1,0,0,0],
@@ -64,6 +52,20 @@ print(sorted_results)
 print("------------------------")
 
 #PART C
+def power_iteration(A, x0,max_iterations):
+    last_m=0
+    m=max(x0, key=abs)[0]
+    x = x0
+    iteration = 0
+
+    while iteration<max_iterations: 
+        last_m = m
+        iteration += 1
+        x = A@x
+        m=max(x, key=abs)[0]
+        x=x/m
+    return x,m
+
 x,m = power_iteration(M,x0,15)
 print(f"Q6. C)")
 print(f"----------------------")
